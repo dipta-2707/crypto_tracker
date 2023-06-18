@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/config/bindings/CryptoChartBinding.dart';
 import 'package:crypto_tracker/view/pages/crypto_details_page.dart';
 import 'package:crypto_tracker/view/pages/home_page.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,6 @@ class AppRouteConfig {
     GetPage(
         name: cryptoDetailsPagePath,
         page: () => const CryptoDetailsPage(),
-        binding: CryptoDetailsPageBinding())
+        bindings: [CryptoDetailsPageBinding(), CryptoChartBinding()])
   ];
 }
