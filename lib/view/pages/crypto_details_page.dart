@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_tracker/controller/crypto_details_page_controller.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../widgets/crypto_chart_widget.dart';
 
 class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
   const CryptoDetailsPage({Key? key}) : super(key: key);
@@ -19,6 +22,7 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // General info
               Row(
                 children: [
                   // currency image
@@ -62,8 +66,24 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
               SizedBox(
                 height: 16.h,
               ),
-              Divider(),
-              SizedBox(height: 16.h),
+              const Divider(),
+
+              SizedBox(
+                height: 250.h,
+                width: double.infinity,
+                child: CryptoChartWidget(),
+              ),
+              SizedBox(height: 12.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  OutlinedButton(onPressed: () {}, child: const Text('24h')),
+                  OutlinedButton(onPressed: () {}, child: const Text('7d')),
+                  OutlinedButton(onPressed: () {}, child: const Text('14d')),
+                  OutlinedButton(onPressed: () {}, child: const Text('30d')),
+                ],
+              ),
+              SizedBox(height: 12.h),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
