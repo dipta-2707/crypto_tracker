@@ -31,6 +31,8 @@ dependencies:
   # Use for responsive design for all screen
   flutter_screenutil: ^5.8.4
 
+  # Use for cache image loading and image error_handling
+  cached_network_image: ^3.2.3
 
 
 dev_dependencies:
