@@ -152,6 +152,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///C:/Users/Acanto/AppData/Local/Pub/Cache/hosted/pub.dev/intl-0.18.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///C:/Users/Acanto/AppData/Local/Pub/Cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
@@ -356,7 +362,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2023-06-18T08:04:53.560916Z",
+  "generated": "2023-06-18T09:38:50.814174Z",
   "generator": "pub",
   "generatorVersion": "3.0.3"
 }

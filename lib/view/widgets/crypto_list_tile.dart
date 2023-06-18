@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class CryptoListTile extends StatelessWidget {
   final CryptoDataModel cryptoDataModel;
-  final Function() onTap;
+  final VoidCallback onTap;
   const CryptoListTile(
       {Key? key, required this.onTap, required this.cryptoDataModel})
       : super(key: key);
@@ -25,7 +25,7 @@ class CryptoListTile extends StatelessWidget {
       ),
       title: Text(cryptoDataModel.name),
       subtitle: Text(
-        cryptoDataModel.symbol,
+        cryptoDataModel.symbol.toUpperCase(),
         style: Get.textTheme.bodySmall,
       ),
       trailing: Column(

@@ -18,7 +18,7 @@ class AppRouteConfig {
     // Crypto Details Page route configs
     GetPage(
         name: cryptoDetailsPagePath,
-        page: () => const CryptoDetailsPage(),
+        page: () => CryptoDetailsPage(cryptoDataModel: Get.arguments),
         bindings: [CryptoDetailsPageBinding(), CryptoChartBinding()])
   ];
 }

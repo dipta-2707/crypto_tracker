@@ -21,7 +21,9 @@ class HomePage extends GetView<HomePageController> {
                 itemCount: 15,
                 itemBuilder: (context, index) => CryptoListTile(
                   cryptoDataModel: controller.cryptoDataList[index],
-                  onTap: controller.toGoCryptoDetailsPage,
+                  onTap: () => controller.toGoCryptoDetailsPage(
+                    cryptoDataModel: controller.cryptoDataList[index],
+                  ),
                 ),
               )
             : Padding(

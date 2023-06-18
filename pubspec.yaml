@@ -32,6 +32,9 @@ dependencies:
   # Use for show price chart
   fl_chart: ^0.63.0
 
+  # date formate
+  intl: ^0.18.1
+
 
 
 dev_dependencies:

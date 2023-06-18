@@ -29,7 +29,8 @@ class HomePageController extends GetxController {
   }
 
   // route to go crypto details page
-  void toGoCryptoDetailsPage() {
-    Get.toNamed(AppRouteConfig.cryptoDetailsPagePath);
+  void toGoCryptoDetailsPage({required CryptoDataModel cryptoDataModel}) {
+    Get.toNamed(AppRouteConfig.cryptoDetailsPagePath,
+        arguments: cryptoDataModel);
   }
 }

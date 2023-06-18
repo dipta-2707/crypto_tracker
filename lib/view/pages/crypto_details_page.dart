@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_tracker/controller/crypto_details_page_controller.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:crypto_tracker/model/crypto_data_model.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,9 @@ import 'package:get/get.dart';
 import '../widgets/crypto_chart_widget.dart';
 
 class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
-  const CryptoDetailsPage({Key? key}) : super(key: key);
+  final CryptoDataModel cryptoDataModel;
+  const CryptoDetailsPage({Key? key, required this.cryptoDataModel})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                         borderRadius: BorderRadius.circular(8.r),
                         color: const Color(0xff3F3E45)),
                     child: CachedNetworkImage(
-                      imageUrl: "http://via.placeholder.com/350x150",
+                      imageUrl: cryptoDataModel.image,
                       width: 120.w,
                       height: 120.h,
                       fit: BoxFit.cover,
@@ -46,20 +49,37 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                   SizedBox(
                     width: 16.w,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Crypto Name'),
-                      SizedBox(height: 8.h),
-                      Text('Crypto Symbol'),
-                      SizedBox(height: 8.h),
-                      Text('Crypto Price'),
-                      SizedBox(height: 8.h),
-                      Text('Crypto Change %'),
-                      SizedBox(height: 8.h),
-                      Text('last Update')
-                    ],
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          cryptoDataModel.name,
+                          style: Get.textTheme.titleLarge,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          cryptoDataModel.symbol.toUpperCase(),
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                          cryptoDataModel.currentPrice.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(height: 8.h),
+                        Text(
+                            '${double.parse(cryptoDataModel.priceChangePercentage24H.toStringAsFixed(3))}%'),
+                        SizedBox(height: 8.h),
+                        Text(
+                          'last Update: ${DateFormat.yMd().format(cryptoDataModel.lastUpdated)}',
+                          style: TextStyle(fontSize: 14.sp),
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -67,7 +87,7 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                 height: 16.h,
               ),
               const Divider(),
-
+              // price chart
               SizedBox(
                 height: 250.h,
                 width: double.infinity,
@@ -87,11 +107,14 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _detailsContainer(title: 'Ranking', value: '1'),
+                  _detailsContainer(
+                      title: 'Ranking',
+                      value: cryptoDataModel.marketCapRank.toString()),
                   SizedBox(width: 8.w),
                   Expanded(
                     child: _detailsContainer(
-                        title: 'Market Capitalization', value: '1232151232'),
+                        title: 'Market Capitalization',
+                        value: cryptoDataModel.marketCap.toString()),
                   ),
                   // SizedBox(width: 8.w),
                 ],
@@ -101,43 +124,48 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                 children: [
                   Expanded(
                       child: _detailsContainer(
-                          title: 'Total Volume', value: '1232151232')),
+                          title: 'Total Volume',
+                          value: cryptoDataModel.totalVolume.toString())),
                   SizedBox(
                     width: 8.w,
                   ),
-                  _detailsContainer(title: 'High 24h', value: '1.002'),
+                  _detailsContainer(
+                      title: 'High 24h',
+                      value: cryptoDataModel.high24H.toString()),
                   SizedBox(width: 8.w),
-                  _detailsContainer(title: 'Low 24h', value: '0.004')
+                  _detailsContainer(
+                      title: 'Low 24h',
+                      value: cryptoDataModel.low24H.toString())
                 ],
               ),
               SizedBox(
                 height: 12.h,
               ),
               _detailsContainer(
-                  leadIcon: Icon(Icons.price_change_outlined),
+                  leadIcon: const Icon(Icons.price_change_outlined),
                   title: 'price_change_24h',
-                  value: '-0.001588591574815057'),
+                  value: cryptoDataModel.priceChangePercentage24H.toString()),
               SizedBox(
                 height: 12.h,
               ),
               _detailsContainer(
                   leadIcon: Icon(Icons.attach_money),
                   title: 'market capitalization change 24h',
-                  value: '-17178378.819843292'),
+                  value: cryptoDataModel.marketCapChange24H.toString()),
               SizedBox(
                 height: 12.h,
               ),
               _detailsContainer(
-                  leadIcon: Icon(Icons.loop),
+                  leadIcon: const Icon(Icons.loop),
                   title: 'circulating supply',
-                  value: '28349063954.4426'),
+                  value: cryptoDataModel.circulatingSupply.toString()),
               SizedBox(
                 height: 12.h,
               ),
               _detailsContainer(
-                  leadIcon: Icon(Icons.monetization_on_outlined),
+                  leadIcon: const Icon(Icons.monetization_on_outlined),
                   title: 'Total supply',
-                  value: '28349043954.442'),
+                  value: cryptoDataModel.totalSupply.toString()),
               SizedBox(
                 height: 12.h,
               ),
@@ -151,18 +179,28 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                 child: Column(
                   children: [
                     Row(children: [
-                      Icon(Icons.arrow_upward_outlined),
+                      Icon(
+                        Icons.arrow_upward_outlined,
+                        size: 18.w,
+                      ),
                       SizedBox(
                         width: 8.w,
                       ),
-                      Text('All Time High'),
-                      Spacer(),
-                      Text('12.08.23')
+                      const Text('All Time High'),
+                      const Spacer(),
+                      Text(
+                        DateFormat.yMd().format(cryptoDataModel.athDate),
+                        style:
+                            Get.textTheme.bodySmall!.copyWith(fontSize: 12.sp),
+                      )
                     ]),
                     SizedBox(height: 8.h),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text('0.877647'), Text('14.03193%')])
+                        children: [
+                          Text(cryptoDataModel.ath.toString()),
+                          Text('${cryptoDataModel.athChangePercentage}%')
+                        ])
                   ],
                 ),
               ),
@@ -179,18 +217,28 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                 child: Column(
                   children: [
                     Row(children: [
-                      Icon(Icons.arrow_downward_outlined),
+                      Icon(
+                        Icons.arrow_upward_outlined,
+                        size: 18.w,
+                      ),
                       SizedBox(
                         width: 8.w,
                       ),
-                      Text('All Time Low'),
-                      Spacer(),
-                      Text('12.08.23')
+                      const Text('All Time Low'),
+                      const Spacer(),
+                      Text(
+                        DateFormat.yMd().format(cryptoDataModel.atlDate),
+                        style:
+                            Get.textTheme.bodySmall!.copyWith(fontSize: 12.sp),
+                      )
                     ]),
                     SizedBox(height: 8.h),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Text('0.877647'), Text('14.03193%')])
+                        children: [
+                          Text(cryptoDataModel.atl.toString()),
+                          Text('${cryptoDataModel.atlChangePercentage}%')
+                        ])
                   ],
                 ),
               ),
