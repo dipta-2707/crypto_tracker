@@ -15,7 +15,9 @@ class HomePage extends GetView<HomePageController> {
       ),
       body: ListView.builder(
         itemCount: 15,
-        itemBuilder: (context, index) => CryptoListTile(),
+        itemBuilder: (context, index) => CryptoListTile(
+          onTap: controller.toGoCryptoDetailsPage,
+        ),
       ),
     );
   }

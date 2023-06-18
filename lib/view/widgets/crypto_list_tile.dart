@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class CryptoListTile extends StatelessWidget {
-  const CryptoListTile({Key? key}) : super(key: key);
+  final Function() onTap;
+  const CryptoListTile({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class CryptoListTile extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 }
