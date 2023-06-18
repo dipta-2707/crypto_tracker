@@ -30,20 +30,23 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
               Row(
                 children: [
                   // currency image
-                  Container(
-                    padding: EdgeInsets.all(12.w),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        color: const Color(0xff3F3E45)),
-                    child: CachedNetworkImage(
-                      imageUrl: cryptoDataModel.image,
-                      width: 120.w,
-                      height: 120.h,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+                  Hero(
+                    tag: cryptoDataModel.id,
+                    child: Container(
+                      padding: EdgeInsets.all(12.w),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: const Color(0xff3F3E45)),
+                      child: CachedNetworkImage(
+                        imageUrl: cryptoDataModel.image,
+                        width: 120.w,
+                        height: 120.h,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   ),
                   // currency general details

@@ -15,13 +15,17 @@ class CryptoListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CachedNetworkImage(
-        imageUrl: cryptoDataModel.image,
-        width: 40.w,
-        height: 40.h,
-        fit: BoxFit.cover,
-        placeholder: (context, url) => ShimmerWidget(width: 40.w, height: 40.h),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+      leading: Hero(
+        tag: cryptoDataModel.id,
+        child: CachedNetworkImage(
+          imageUrl: cryptoDataModel.image,
+          width: 40.w,
+          height: 40.h,
+          fit: BoxFit.cover,
+          placeholder: (context, url) =>
+              ShimmerWidget(width: 40.w, height: 40.h),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
       ),
       title: Text(cryptoDataModel.name),
       subtitle: Text(
