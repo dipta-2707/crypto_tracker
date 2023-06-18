@@ -70,13 +70,18 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                         ),
                         SizedBox(height: 8.h),
                         Text(
-                          cryptoDataModel.currentPrice.toString(),
+                          '${cryptoDataModel.currentPrice} USD',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(height: 8.h),
                         Text(
-                            '${double.parse(cryptoDataModel.priceChangePercentage24H.toStringAsFixed(3))}%'),
+                            '${double.parse(cryptoDataModel.priceChangePercentage24H.toStringAsFixed(3))}%',   style: Get.textTheme.bodySmall!.copyWith(
+                          fontSize: 12.sp,
+                          color: (cryptoDataModel.priceChangePercentage24H < 0)
+                              ? Colors.red
+                              : Colors.green,
+                        ),),
                         SizedBox(height: 8.h),
                         Text(
                           'last Update: ${DateFormat.yMd().format(cryptoDataModel.lastUpdated)}',
@@ -198,14 +203,14 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
               ),
               _detailsContainer(
                   leadIcon: const Icon(Icons.price_change_outlined),
-                  title: 'price_change_24h',
+                  title: 'Price change 24h',
                   value: cryptoDataModel.priceChangePercentage24H.toString()),
               SizedBox(
                 height: 12.h,
               ),
               _detailsContainer(
-                  leadIcon: Icon(Icons.attach_money),
-                  title: 'market capitalization change 24h',
+                  leadIcon: const Icon(Icons.attach_money),
+                  title: 'Market Capitalization Change 24h',
                   value: cryptoDataModel.marketCapChange24H.toString()),
               SizedBox(
                 height: 12.h,

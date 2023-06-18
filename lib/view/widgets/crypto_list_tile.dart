@@ -37,7 +37,7 @@ class CryptoListTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            cryptoDataModel.currentPrice.toString(),
+           '\$${cryptoDataModel.currentPrice.toString()}',
             style: Get.textTheme.bodyMedium,
           ),
           Text(

@@ -33,4 +33,10 @@ class HomePageController extends GetxController {
     Get.toNamed(AppRouteConfig.cryptoDetailsPagePath,
         arguments: cryptoDataModel);
   }
+
+  // route to go setting page
+
+void toGoSettingPage(){
+    Get.toNamed(AppRouteConfig.settingPagePath);
+}
 }

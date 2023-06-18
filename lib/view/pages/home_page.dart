@@ -14,6 +14,10 @@ class HomePage extends GetView<HomePageController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Crypto Tracker'),
+        actions: [IconButton(onPressed: (){
+          controller.toGoSettingPage();
+        },
+            icon: const Icon(Icons.settings))],
       ),
       body: Obx(
         () => !controller.isDataLoading
