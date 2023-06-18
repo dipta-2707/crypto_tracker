@@ -1,3 +1,4 @@
+import 'package:crypto_tracker/model/crypto_market_chart_model.dart';
 import 'package:dio/dio.dart';
 
 import '../config/api_config.dart';
@@ -23,6 +24,23 @@ class AppApi {
       return (response.data as List)
           .map((e) => CryptoDataModel.fromJson(e))
           .toList();
+    } else {
+      return [];
+    }
+  }
+
+  // fetch crypto history price chart data
+  static Future<List<List<double>>> getMarketChartData(
+      {required String cryptoName, required String days}) async {
+    final param = {
+      "vs_currency": "usd",
+      "days": days,
+    };
+    final response =
+        await dio.get('/$cryptoName/market_chart', queryParameters: param);
+
+    if (response.statusCode == 200) {
+      return CryptoMarketChartModel.fromJson(response.data).prices;
     } else {
       return [];
     }

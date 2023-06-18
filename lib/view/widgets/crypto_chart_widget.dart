@@ -2,17 +2,15 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class CryptoChartWidget extends StatelessWidget {
+  final List<List<double>> dataList;
   const CryptoChartWidget({
     super.key,
+    required this.dataList,
   });
 
   @override
   Widget build(BuildContext context) {
     return LineChart(LineChartData(
-        minX: 0,
-        maxX: 20,
-        minY: 0,
-        maxY: 5,
         titlesData: FlTitlesData(
           show: false,
         ),
@@ -24,13 +22,11 @@ class CryptoChartWidget extends StatelessWidget {
         ),
         lineBarsData: [
           LineChartBarData(
-              isCurved: false,
-              belowBarData: BarAreaData(show: true),
-              spots: [
-                FlSpot(0, 3),
-                FlSpot(2.6, 2),
-                FlSpot(3.1, 0),
-              ])
+            isCurved: false,
+            dotData: FlDotData(show: false),
+            belowBarData: BarAreaData(show: true),
+            spots: dataList.map((e) => FlSpot(e[0], e[1])).toList(),
+          )
         ]));
   }
 }

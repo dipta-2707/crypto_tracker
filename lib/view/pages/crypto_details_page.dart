@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:crypto_tracker/controller/crypto_details_page_controller.dart';
 import 'package:crypto_tracker/model/crypto_data_model.dart';
+import 'package:crypto_tracker/view/widgets/shimmer_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,10 +89,17 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
               ),
               const Divider(),
               // price chart
-              SizedBox(
-                height: 250.h,
-                width: double.infinity,
-                child: CryptoChartWidget(),
+
+              Obx(
+                () => !controller.isChartDataLoading.value
+                    ? SizedBox(
+                        height: 250.h,
+                        width: double.infinity,
+                        child: CryptoChartWidget(
+                          dataList: controller.cryptoMarketHistoryDataList,
+                        ),
+                      )
+                    : ShimmerWidget(width: double.infinity, height: 250.h),
               ),
               SizedBox(height: 12.h),
               Row(

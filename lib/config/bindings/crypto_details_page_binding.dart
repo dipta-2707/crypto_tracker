@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 class CryptoDetailsPageBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<CryptoDetailsPageController>(
-        () => CryptoDetailsPageController());
+    Get.put(CryptoDetailsPageController());
   }
 }
