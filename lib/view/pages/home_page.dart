@@ -1,8 +1,10 @@
+import 'package:crypto_tracker/controller/home_page_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../widgets/crypto_list_tile.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<HomePageController> {
   const HomePage({Key? key}) : super(key: key);
 
   @override
