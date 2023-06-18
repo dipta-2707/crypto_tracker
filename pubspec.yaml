@@ -29,6 +29,10 @@ dependencies:
   # Use for cache image loading and image error_handling
   cached_network_image: ^3.2.3
 
+  # Use for show price chart
+  fl_chart: ^0.63.0
+
+
 
 dev_dependencies:
   flutter_test:
