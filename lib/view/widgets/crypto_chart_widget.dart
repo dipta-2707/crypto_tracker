@@ -11,10 +11,10 @@ class CryptoChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LineChart(LineChartData(
-        titlesData: FlTitlesData(
+        titlesData: const FlTitlesData(
           show: false,
         ),
-        gridData: FlGridData(
+        gridData: const FlGridData(
           show: false,
         ),
         borderData: FlBorderData(
@@ -23,7 +23,7 @@ class CryptoChartWidget extends StatelessWidget {
         lineBarsData: [
           LineChartBarData(
             isCurved: false,
-            dotData: FlDotData(show: false),
+            dotData: const FlDotData(show: false),
             belowBarData: BarAreaData(show: true),
             spots: dataList.map((e) => FlSpot(e[0], e[1])).toList(),
           )

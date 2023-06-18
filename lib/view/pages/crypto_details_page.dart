@@ -102,14 +102,58 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                     : ShimmerWidget(width: double.infinity, height: 250.h),
               ),
               SizedBox(height: 12.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlinedButton(onPressed: () {}, child: const Text('24h')),
-                  OutlinedButton(onPressed: () {}, child: const Text('7d')),
-                  OutlinedButton(onPressed: () {}, child: const Text('14d')),
-                  OutlinedButton(onPressed: () {}, child: const Text('30d')),
-                ],
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    OutlinedButton(
+                      onPressed: () {
+                        controller.setSelectedDayIndex(0);
+                        controller.onDayChange('1');
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              controller.selectedDayIndex == 0
+                                  ? Get.theme.colorScheme.primaryContainer
+                                  : null)),
+                      child: const Text('24h'),
+                    ),
+                    OutlinedButton(
+                      onPressed: () {
+                        controller.setSelectedDayIndex(1);
+                        controller.onDayChange('7');
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              controller.selectedDayIndex == 1
+                                  ? Get.theme.colorScheme.primaryContainer
+                                  : null)),
+                      child: const Text('7d'),
+                    ),
+                    OutlinedButton(
+                        onPressed: () {
+                          controller.setSelectedDayIndex(2);
+                          controller.onDayChange('14');
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                controller.selectedDayIndex == 2
+                                    ? Get.theme.colorScheme.primaryContainer
+                                    : null)),
+                        child: const Text('14d')),
+                    OutlinedButton(
+                        onPressed: () {
+                          controller.setSelectedDayIndex(3);
+                          controller.onDayChange('30');
+                        },
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                controller.selectedDayIndex == 3
+                                    ? Get.theme.colorScheme.primaryContainer
+                                    : null)),
+                        child: const Text('30d')),
+                  ],
+                ),
               ),
               SizedBox(height: 12.h),
               Row(

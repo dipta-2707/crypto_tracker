@@ -12,6 +12,14 @@ class CryptoDetailsPageController extends GetxController
   @override
   RxList<List<double>> cryptoMarketHistoryDataList = <List<double>>[].obs;
 
+  RxInt _selectedDayIndex = 0.obs;
+
+  int get selectedDayIndex => _selectedDayIndex.value;
+
+  void setSelectedDayIndex(int index) {
+    _selectedDayIndex.value = index;
+  }
+
   @override
   void onInit() {
     isChartDataLoading.value = true;
