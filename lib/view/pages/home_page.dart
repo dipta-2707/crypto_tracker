@@ -22,7 +22,9 @@ class HomePage extends GetView<HomePageController> {
       body: Obx(
         () => !controller.isDataLoading
             ? ListView.builder(
-                itemCount: 15,
+                itemCount: controller.initialDataLength,
+                controller: controller.scrollController,
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) => CryptoListTile(
                   cryptoDataModel: controller.cryptoDataList[index],
                   onTap: () => controller.toGoCryptoDetailsPage(

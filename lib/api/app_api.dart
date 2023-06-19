@@ -13,18 +13,23 @@ class AppApi {
     final param = {
       "vs_currency": "usd",
       "order": "market_cap_desc",
-      "per_page": "50",
-      "page": "1",
+      "per_page": "45",
+      "page":"1",
       "sparkline": "false",
       "local": "en",
     };
-    final response = await dio.get(AppApiPathConstants.marketCryptoData,
-        queryParameters: param);
-    if (response.statusCode == 200) {
-      return (response.data as List)
-          .map((e) => CryptoDataModel.fromJson(e))
-          .toList();
-    } else {
+
+    try {
+      final response = await dio.get(AppApiPathConstants.marketCryptoData,
+          queryParameters: param);
+      if (response.statusCode == 200) {
+        return (response.data as List)
+            .map((e) => CryptoDataModel.fromJson(e))
+            .toList();
+      } else {
+        return [];
+      }
+    } on DioException catch (e) {
       return [];
     }
   }
