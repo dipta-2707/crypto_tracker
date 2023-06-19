@@ -13,9 +13,9 @@ class HomePageController extends GetxController {
 
   RxBool _isDataLoading = true.obs;
 
-  RxBool _isloadingMore = false.obs;
+   //RxBool _isloadingMore = false.obs;
 
-  bool get isLoadingMore => _isloadingMore.value;
+  //bool get isLoadingMore => _isloadingMore.value;
 
   bool get isDataLoading => _isDataLoading.value;
 
@@ -33,7 +33,7 @@ class HomePageController extends GetxController {
   @override
   void onInit() {
     _isDataLoading.value = true;
-    _isloadingMore.value = false;
+   // _isloadingMore.value = false;
     super.onInit();
     getCryptoData();
 
@@ -61,7 +61,7 @@ class HomePageController extends GetxController {
       AppApi.getCryptoMarketData().then((value) {
         _cryptoDataList.addAll(value);
         _isDataLoading.value = false;
-        _isloadingMore.value = false;
+       // _isloadingMore.value = false;
       });
   }
 
