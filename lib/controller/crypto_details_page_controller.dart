@@ -20,6 +20,10 @@ class CryptoDetailsPageController extends GetxController
     _selectedDayIndex.value = index;
   }
 
+  // last 6 hours average price
+  RxDouble _cryptoAverageHistoryPrices = 0.0.obs;
+  double get cryptoAverageHistoryPrices => _cryptoAverageHistoryPrices.value;
+
   @override
   void onInit() {
     isChartDataLoading.value = true;
@@ -27,6 +31,24 @@ class CryptoDetailsPageController extends GetxController
     CryptoDataModel cryptoDataModel = Get.arguments;
     cryptoName = cryptoDataModel.id;
     getMarketHistoryData(cryptoName: cryptoName, days: '1');
+    //get crypto history data from firebase
+    AppApi.getCryptoHistoryData(cryptoDataModel).then((value) {
+      // calculate the average prices for last 6 hours
+      final currentTime = DateTime.now();
+      int counter = 0;
+      for (int i = 0; i < value.length; i++) {
+        // last 6 hour
+        if (DateTime.fromMillisecondsSinceEpoch(value[i].timestamp)
+                .isAfter(currentTime.subtract(const Duration(hours: 6))) &&
+            DateTime.fromMillisecondsSinceEpoch(value[i].timestamp)
+                .isBefore(currentTime)) {
+          _cryptoAverageHistoryPrices.value += value[i].price;
+          counter++;
+        }
+      }
+      _cryptoAverageHistoryPrices.value =
+          _cryptoAverageHistoryPrices.value / counter;
+    });
   }
 
   // fetch market history data

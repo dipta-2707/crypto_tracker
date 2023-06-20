@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import '../config/api_config.dart';
 import '../constants/app_api_path_constants.dart';
 import '../model/crypto_data_model.dart';
+import '../model/crypto_price_history_model.dart';
 
 class AppApi {
   // init the dio
@@ -56,10 +57,21 @@ class AppApi {
   }
 
   // fetch crypto history price for last 6 hours from firebase
+  static Future<List<CryptoPriceHistoryModel>> getCryptoHistoryData(
+      CryptoDataModel cryptoDataModel) async {
+    final result = await firestore
+        .collection('cryptocurrencieshistory')
+        .doc(cryptoDataModel.id)
+        .collection('historydata')
+        .get();
+
+    return result.docs
+        .map((e) => CryptoPriceHistoryModel.fromJson(e.data()))
+        .toList();
+  }
 
   // save api result in firebase
   static Future<void> saveCryptoData(CryptoDataModel cryptoDataModel) async {
-    print(cryptoDataModel.id);
     await firestore
         .collection('cryptocurrencieshistory')
         .doc(cryptoDataModel.id)
@@ -67,7 +79,7 @@ class AppApi {
         .doc()
         .set({
       'price': cryptoDataModel.currentPrice,
-      'timestamp': DateTime.now(),
+      'timestamp': DateTime.now().millisecondsSinceEpoch,
     });
   }
 }

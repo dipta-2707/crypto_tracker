@@ -103,7 +103,7 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                 height: 10.h,
               ),
 
-              _cryptoAverageHistory(),
+              Obx(() => Text('${controller.cryptoAverageHistoryPrices} USD')),
               SizedBox(
                 height: 16.h,
               ),
