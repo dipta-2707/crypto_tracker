@@ -24,6 +24,7 @@ class HomePageController extends GetxController {
   //bool get isLoadingMore => _isloadingMore.value;
 
   bool get isDataLoading => _isDataLoading.value;
+  void putIsDataLoading(bool value) => _isDataLoading.value = value;
 
   // page scroll controller
   ScrollController scrollController = ScrollController();

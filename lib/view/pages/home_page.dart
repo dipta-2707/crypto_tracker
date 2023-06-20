@@ -30,17 +30,35 @@ class HomePage extends GetView<HomePageController> {
       ),
       body: Obx(
         () => !controller.isDataLoading
-            ? ListView.builder(
-                itemCount: controller.initialDataLength,
-                controller: controller.scrollController,
-                physics: const BouncingScrollPhysics(),
-                itemBuilder: (context, index) => CryptoListTile(
-                  cryptoDataModel: controller.cryptoDataList[index],
-                  onTap: () => controller.toGoCryptoDetailsPage(
-                    cryptoDataModel: controller.cryptoDataList[index],
-                  ),
-                ),
-              )
+            ? controller.cryptoDataList.isNotEmpty
+                ? ListView.builder(
+                    itemCount: controller.initialDataLength,
+                    controller: controller.scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (context, index) => CryptoListTile(
+                      cryptoDataModel: controller.cryptoDataList[index],
+                      onTap: () => controller.toGoCryptoDetailsPage(
+                        cryptoDataModel: controller.cryptoDataList[index],
+                      ),
+                    ),
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'No data, please check your internet connection!',
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 20.h),
+                      IconButton(
+                          onPressed: () {
+                            controller.putIsDataLoading(true);
+                            controller.getCryptoData();
+                          },
+                          icon: const Icon(Icons.refresh_outlined))
+                    ],
+                  )
             : Padding(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
                 child: ListView.separated(
