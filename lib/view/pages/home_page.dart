@@ -22,10 +22,10 @@ class HomePage extends GetView<HomePageController> {
               icon: const Icon(Icons.settings))
         ],
         bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 0.h),
             child: Obx(() => controller.isRefreshing
-                ? LinearProgressIndicator()
-                : SizedBox()),
-            preferredSize: Size(double.infinity, 0.h)),
+                ? const LinearProgressIndicator()
+                : const SizedBox())),
       ),
       body: Obx(
         () => !controller.isDataLoading

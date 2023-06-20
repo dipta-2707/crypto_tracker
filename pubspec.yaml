@@ -38,6 +38,9 @@ dependencies:
   # Use for save some local data like interval settings
   shared_preferences: ^2.1.2
 
+  #use for firebase core
+  firebase_core: ^2.14.0
+
 
 
 dev_dependencies:
