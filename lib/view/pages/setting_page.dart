@@ -13,29 +13,33 @@ class SettingPage extends GetView<SettingPageController> {
         title: const Text('Settings'),
       ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 20.w,vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Data fetching duration'),
-            SizedBox(height: 8.h,),
+            SizedBox(
+              height: 8.h,
+            ),
             Obx(
-              ()=> Slider(
+              () => Slider(
                 min: 1,
                 value: controller.apiDuration.toDouble(),
                 max: 15,
                 divisions: 15,
                 label: controller.apiDuration.toString(),
-
                 onChanged: (value) {
                   controller.putApiDuration(value.toInt());
-              },),
+                },
+              ),
             ),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: () {
+                        controller.updateApiDuration();
+                      },
                       child: const Text('Save')),
                 ),
               ],

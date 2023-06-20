@@ -35,6 +35,9 @@ dependencies:
   # date formate
   intl: ^0.18.1
 
+  # Use for save some local data like interval settings
+  shared_preferences: ^2.1.2
+
 
 
 dev_dependencies:
