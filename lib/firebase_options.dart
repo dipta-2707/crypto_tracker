@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart'
 /// ```dart
 /// import 'firebase_options.dart';
 /// // ...
+/// .00
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
@@ -63,7 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '964749476620',
     projectId: 'crypto-tracker-1ba1d',
     storageBucket: 'crypto-tracker-1ba1d.appspot.com',
-    iosClientId: '964749476620-2fkin5t63tdg6jul488vnd4pk1a6actd.apps.googleusercontent.com',
+    iosClientId:
+        '964749476620-2fkin5t63tdg6jul488vnd4pk1a6actd.apps.googleusercontent.com',
     iosBundleId: 'com.example.cryptoTracker',
   );
 }
