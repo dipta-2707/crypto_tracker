@@ -41,6 +41,8 @@ dependencies:
   #use for firebase core
   firebase_core: ^2.14.0
 
+  #use fot firestore database
+  cloud_firestore: ^4.8.1
 
 
 dev_dependencies:

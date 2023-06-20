@@ -19,6 +19,7 @@ class HomePage extends GetView<HomePageController> {
               onPressed: () {
                 controller.toGoSettingPage();
               },
+              tooltip: 'setting',
               icon: const Icon(Icons.settings))
         ],
         bottom: PreferredSize(

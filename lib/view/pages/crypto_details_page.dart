@@ -76,12 +76,15 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                         ),
                         SizedBox(height: 8.h),
                         Text(
-                            '${double.parse(cryptoDataModel.priceChangePercentage24H.toStringAsFixed(3))}%',   style: Get.textTheme.bodySmall!.copyWith(
-                          fontSize: 12.sp,
-                          color: (cryptoDataModel.priceChangePercentage24H < 0)
-                              ? Colors.red
-                              : Colors.green,
-                        ),),
+                          '${double.parse(cryptoDataModel.priceChangePercentage24H.toStringAsFixed(3))}%',
+                          style: Get.textTheme.bodySmall!.copyWith(
+                            fontSize: 12.sp,
+                            color:
+                                (cryptoDataModel.priceChangePercentage24H < 0)
+                                    ? Colors.red
+                                    : Colors.green,
+                          ),
+                        ),
                         SizedBox(height: 8.h),
                         Text(
                           'last Update: ${DateFormat.yMd().format(cryptoDataModel.lastUpdated)}',
@@ -92,6 +95,15 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
                   )
                 ],
               ),
+              SizedBox(
+                height: 16.h,
+              ),
+              const Text('Last 6 hours average price'),
+              SizedBox(
+                height: 10.h,
+              ),
+
+              _cryptoAverageHistory(),
               SizedBox(
                 height: 16.h,
               ),
@@ -336,6 +348,44 @@ class CryptoDetailsPage extends GetView<CryptoDetailsPageController> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _cryptoAverageHistory() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Column(
+            children: [Text('-1hr'), Text('16005')],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [Text('-2hr'), Text('16005')],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [Text('-3hr'), Text('16005')],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [Text('-4hr'), Text('16005')],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [Text('-5hr'), Text('16005')],
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [Text('-6hr'), Text('16005')],
+          ),
+        )
+      ],
     );
   }
 }

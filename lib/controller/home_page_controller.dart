@@ -79,6 +79,9 @@ class HomePageController extends GetxController {
   void getCryptoData() {
     AppApi.getCryptoMarketData().then((value) {
       _cryptoDataList.value = value;
+      for (int i = 0; i < value.length; i++) {
+        AppApi.saveCryptoData(value[i]);
+      }
       if (_isDataLoading.value) {
         _isDataLoading.value = false;
       }
