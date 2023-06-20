@@ -39,9 +39,14 @@ class HomePageController extends GetxController {
   // timer for fetch data in a interval
   Timer? _timer;
 
+  // refresh process indicator value
+  RxBool _isRefreshing = false.obs;
+  bool get isRefreshing => _isRefreshing.value;
+
   @override
   void onInit() async {
     _isDataLoading.value = true;
+    _isRefreshing.value = false;
     // _isloadingMore.value = false;
     super.onInit();
     getCryptoData();
@@ -89,6 +94,13 @@ class HomePageController extends GetxController {
     }
     _timer = Timer.periodic(Duration(minutes: intervalTime), (timer) {
       getCryptoData();
+
+      // trigger the refresh indicator
+      _isRefreshing.value = true;
+      Timer(const Duration(seconds: 3), () {
+        _isRefreshing.value = false;
+      });
+
       if (kDebugMode) {
         print('fetching updated data....');
       }
