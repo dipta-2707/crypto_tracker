@@ -46,7 +46,7 @@ class HomePage extends GetView<HomePageController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'No data, please check your internet connection!',
                         textAlign: TextAlign.center,
                       ),
